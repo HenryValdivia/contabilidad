@@ -1,21 +1,16 @@
 package com.empresa.contabilidad.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class TiposCambioMonedaId implements Serializable {
     private LocalDateTime fecha;
     private Integer codMoneda;
-
-    public TiposCambioMonedaId() {}
-
-    public TiposCambioMonedaId(LocalDateTime fecha, Integer codMoneda) {
-        this.fecha = fecha;
-        this.codMoneda = codMoneda;
-    }
-
-    public LocalDateTime getFecha() { return fecha; }
-    public void setFecha(LocalDateTime fecha) { this.fecha = fecha; }
-    public Integer getCodMoneda() { return codMoneda; }
-    public void setCodMoneda(Integer codMoneda) { this.codMoneda = codMoneda; }
 }
