@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:4200")//permite solicitudes desde el frontend de Angular que se ejecuta en localhost:4200, evitando problemas de CORS al realizar peticiones al backend.
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {

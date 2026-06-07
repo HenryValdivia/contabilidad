@@ -41,7 +41,7 @@ public interface ComprobanteResumenRepository extends JpaRepository<Comprobante,
             "AND (CAST(:codGestion AS integer) IS NULL OR c.codGestion = :codGestion) " +
             "AND (CAST(:codTipoComprobante AS integer) IS NULL OR c.codTipoComprobante = :codTipoComprobante) " +
             "AND (CAST(:fechaComprobante AS date) IS NULL OR CAST(c.fechaComprobante AS date) = CAST(:fechaComprobante AS date)) " +
-            "AND (CAST(:glosaComprobante AS string) IS NULL OR c.glosa LIKE CONCAT('%', :glosaComprobante, '%')) " +
+            "AND (CAST(:glosaComprobante AS string) IS NULL OR c.glosa LIKE CONCAT('%', cast(:glosaComprobante as string), '%')) " +
             "AND (CAST(:codEstadoComprobante AS integer) IS NULL OR c.codEstadoComprobante = :codEstadoComprobante) " +
             "ORDER BY c.codGestion, c.codComprobante")
     List<ComprobanteResumenDto> findAllResumenFiltered(

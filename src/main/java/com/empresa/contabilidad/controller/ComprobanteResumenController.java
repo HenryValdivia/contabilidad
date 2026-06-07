@@ -18,7 +18,7 @@ public class ComprobanteResumenController {
     public ComprobanteResumenController(ComprobanteResumenService service) {
         this.service = service;
     }
-
+    
     @PostMapping
     public List<ComprobanteResumenDto> findAll(@Valid @RequestBody ComprobanteResumenDto filtro) {
         
