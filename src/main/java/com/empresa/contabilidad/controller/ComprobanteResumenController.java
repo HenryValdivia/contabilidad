@@ -5,6 +5,10 @@ import com.empresa.contabilidad.service.ComprobanteResumenService;
 
 import jakarta.validation.Valid;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,12 +24,14 @@ public class ComprobanteResumenController {
     }
     
     @PostMapping
-    public List<ComprobanteResumenDto> findAll(@Valid @RequestBody ComprobanteResumenDto filtro) {
+    public Page<ComprobanteResumenDto> findAll(@Valid @RequestBody ComprobanteResumenDto filtro) {
+
+        Pageable pageable = PageRequest.of(filtro.getPage(), filtro.getSize(), Sort.by("fechaComprobante").descending());
         
         if (filtro.getCodEmpresa() == null && filtro.getCodGestion() == null && 
             filtro.getCodTipoComprobante() == null && filtro.getFechaComprobante() == null && 
             filtro.getGlosaComprobante() == null && filtro.getCodEstadoComprobante() == null) {
-            return service.findAllResumenOrdered();
+            return service.findAllResumenOrdered(pageable);
         }
         
         return service.findAllResumenFiltered(
@@ -34,6 +40,7 @@ public class ComprobanteResumenController {
             filtro.getCodTipoComprobante(), 
             filtro.getFechaComprobante(), 
             filtro.getGlosaComprobante(), 
-            filtro.getCodEstadoComprobante());
+            filtro.getCodEstadoComprobante(),
+            pageable);
     }
 }

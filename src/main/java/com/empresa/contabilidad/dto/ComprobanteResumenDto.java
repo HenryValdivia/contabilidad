@@ -29,4 +29,6 @@ public class ComprobanteResumenDto {
     private Integer codEmisionCheqhe;
     private LocalDateTime fechaSistema;
     private String descrMontoTotal;
+    private int page = 0;
+    private int size = 10;
 }
