@@ -54,12 +54,15 @@ public class ComprobanteController {
         System.out.println("Datos recibidos: " + comprobante.getFechaComprobante());
 
         Comprobante savedComprobante = service.create(comprobante);
+        int i = 1;
 
         if (comprobanteDto.getComprobanteDetalleList() != null) {
             for (ComprobanteDetalle detalle : comprobanteDto.getComprobanteDetalleList()) {
+                detalle.setCodComprobanteDetalle(i);
                 detalle.setCodComprobante(savedComprobante.getCodComprobante());
                 detalle.setCodGestion(savedComprobante.getCodGestion());
                 detalleService.create(detalle);
+                i++;
             }
         }
 

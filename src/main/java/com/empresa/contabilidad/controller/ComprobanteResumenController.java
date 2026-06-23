@@ -1,5 +1,6 @@
 package com.empresa.contabilidad.controller;
 
+import com.empresa.contabilidad.dto.ComprobanteInicDto;
 import com.empresa.contabilidad.dto.ComprobanteResumenDto;
 import com.empresa.contabilidad.service.ComprobanteResumenService;
 
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/comprobantes/resumen")
+@RequestMapping("/api/comprobantes")
 public class ComprobanteResumenController {
 
     private final ComprobanteResumenService service;
@@ -23,7 +24,7 @@ public class ComprobanteResumenController {
         this.service = service;
     }
     
-    @PostMapping
+    @PostMapping("/resumen")
     public Page<ComprobanteResumenDto> findAll(@Valid @RequestBody ComprobanteResumenDto filtro) {
 
         Pageable pageable = PageRequest.of(filtro.getPage(), filtro.getSize(), Sort.by("fechaComprobante").descending());
@@ -43,4 +44,10 @@ public class ComprobanteResumenController {
             filtro.getCodEstadoComprobante(),
             pageable);
     }
+    @GetMapping("/obtenerComprobanteInic")
+    public ComprobanteInicDto obtenerComprobanteInic() {
+        return service.obtenerComprobanteInic();
+    }
+    
+
 }

@@ -42,4 +42,18 @@ public class PlanDeCuentasServiceImpl implements PlanDeCuentasService {
         PlanDeCuentas existing = findById(id);
         repo.delete(existing);
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<PlanDeCuentas> buscarPlanDeCuentas(PlanDeCuentas p) {
+        // Enviar cadenas vacías asegura que el Query Method con Containing busque todos los registros
+        // si el usuario no proporciona un filtro específico.
+        String filtroCod = p.getCodCuenta() != null ? p.getCodCuenta() : "";
+        String filtroNombre = p.getNombreCuenta() != null ? p.getNombreCuenta() : "";
+
+        return repo.findByCodCuentaStartingWithIgnoreCaseAndNombreCuentaStartingWithIgnoreCase(
+                filtroCod, 
+                filtroNombre
+        );
+    }
 }

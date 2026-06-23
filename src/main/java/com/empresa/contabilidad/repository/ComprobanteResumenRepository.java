@@ -1,5 +1,6 @@
 package com.empresa.contabilidad.repository;
 
+import com.empresa.contabilidad.dto.ComprobanteInicDto;
 import com.empresa.contabilidad.dto.ComprobanteResumenDto;
 import com.empresa.contabilidad.entity.Comprobante;
 import com.empresa.contabilidad.entity.ComprobanteId;
@@ -57,4 +58,11 @@ public interface ComprobanteResumenRepository extends JpaRepository<Comprobante,
             @Param("codEstadoComprobante") Integer codEstadoComprobante,
             Pageable pageable
     );//se agregó pageable para permitir la paginación de resultados filtrados
+    @Query(value = "SELECT " +
+           "  (SELECT max(nro_comprobante) FROM contabilidad.comprobante WHERE cod_gestion = 1) AS nroComprobante, " +
+           "  TO_CHAR(NOW(), 'YYYY-MM-DD\"T\"HH24:MI:SS') AS fechaComprobante, " +
+           "  (SELECT cod_tipo_comprobante FROM contabilidad.tipos_comprobante WHERE nombre_tipo_comprobante = 'INGRESO') AS codTipoComprobante, " +
+           "  (SELECT cod_moneda FROM public.monedas WHERE nombre_moneda = 'BS') AS codMoneda", 
+           nativeQuery = true)
+    ComprobanteInicDto obtenerComprobanteInic();
 }

@@ -11,4 +11,5 @@ public interface PlanDeCuentasService {
     PlanDeCuentas create(PlanDeCuentas dto);
     PlanDeCuentas update(PlanDeCuentasId id, PlanDeCuentas dto);
     void delete(PlanDeCuentasId id);
+    List<PlanDeCuentas> buscarPlanDeCuentas(PlanDeCuentas p);
 }

@@ -40,4 +40,9 @@ public class PlanDeCuentasController {
         service.delete(new PlanDeCuentasId(codPlanCuenta, codGestion));
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/buscarPlanDeCuentas")
+    public ResponseEntity<List<PlanDeCuentas>> buscarPlanDeCuentas(@Valid @RequestBody PlanDeCuentas p) {
+        return ResponseEntity.ok(service.buscarPlanDeCuentas(p));
+    }
 }

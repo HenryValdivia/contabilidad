@@ -1,5 +1,6 @@
 package com.empresa.contabilidad.service.impl;
 
+import com.empresa.contabilidad.dto.ComprobanteInicDto;
 import com.empresa.contabilidad.dto.ComprobanteResumenDto;
 import com.empresa.contabilidad.entity.Comprobante;
 import com.empresa.contabilidad.entity.Empresa;
@@ -124,5 +125,10 @@ public class ComprobanteResumenServiceImpl implements ComprobanteResumenService 
 
     return new PageImpl<>(result, pageable, total);
         //return repository.findAllResumenFiltered(codEmpresa, codGestion, codTipoComprobante, fechaComprobante, glosaComprobante, codEstadoComprobante, pageable);
+    }
+    
+    @Override
+    public ComprobanteInicDto obtenerComprobanteInic() {
+        return repository.obtenerComprobanteInic();
     }
 }
